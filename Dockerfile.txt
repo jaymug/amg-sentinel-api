@@ -1,0 +1,17 @@
+# Use official lightweight Python image
+FROM python:3.11-slim
+
+# Set working directory inside container
+WORKDIR /app
+
+# Copy dependency list or install requirements directly
+RUN pip install --no-cache-dir fastapi uvicorn httpx pydantic
+
+# Copy the rest of your application code into the container
+COPY . /app
+
+# Expose port 8000 for web traffic
+EXPOSE 8000
+
+# Command to run the application using Uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
